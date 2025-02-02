@@ -113,7 +113,7 @@ const movePiece = ([startRow, startCell], [destRow, destCell]) => {
   return prevEle1;
 };
 
-document.addEventListener("DOMContentLoaded", function () {
+const main = () => {
   const chess = new Chess();
 
   const emptyStrings = Array(8).fill("");
@@ -130,7 +130,9 @@ document.addEventListener("DOMContentLoaded", function () {
   document.body.appendChild(generateBoard("board", cellColors, chessPieces));
 
   // animateMoves();
-});
+};
+
+document.addEventListener("DOMContentLoaded", main);
 
 const animateMoves = () => {
   const gameMoves = {
@@ -138,35 +140,35 @@ const animateMoves = () => {
       [
         ["2", "e"],
         ["4", "e"],
-      ], // White Pawn e2 to e4
+      ],
       [
         ["7", "e"],
         ["5", "e"],
-      ], // Black Pawn e7 to e5
+      ],
       [
         ["1", "g"],
         ["3", "f"],
-      ], // White Knight g1 to f3
+      ],
       [
         ["8", "b"],
         ["6", "c"],
-      ], // Black Knight b8 to c6
+      ],
       [
         ["1", "f"],
         ["4", "c"],
-      ], // White Bishop f1 to c4
+      ],
       [
         ["8", "g"],
         ["6", "f"],
-      ], // Black Knight g8 to f6
+      ],
       [
         ["0", "c"],
         ["1", "d"],
-      ], // White Queen d1 to f3 (Checkmate threat)
+      ],
       [
         ["9", "d"],
         ["9", "d"],
-      ], // Black resigns (game over)
+      ],
     ],
   };
 
