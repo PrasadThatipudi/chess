@@ -113,6 +113,33 @@ const movePiece = ([startRow, startCell], [destRow, destCell]) => {
   return prevEle1;
 };
 
+const highlightCell = (cell, highlightWith) => {
+  cell.defaultColor = cell.style.backgroundColor;
+  cell.style.backgroundColor = highlightWith;
+
+  return cell;
+};
+
+const addOnclickEventForCells = (tableId) => {
+  const table = document.getElementById(tableId);
+  const cells = table.querySelectorAll("td");
+
+  table.lastClicked = null;
+
+  for (const cell of cells) {
+    cell.addEventListener("click", () => {
+      if (table.lastClicked !== null) {
+        table.lastClicked.style.backgroundColor =
+          table.lastClicked.defaultColor;
+      }
+
+      table.lastClicked = highlightCell(cell, "lightblue");
+    });
+  }
+
+  return cells;
+};
+
 const main = () => {
   const chess = new Chess();
 
@@ -127,8 +154,10 @@ const main = () => {
   ];
   const cellColors = ["white", "brown"];
 
-  document.body.appendChild(generateBoard("board", cellColors, chessPieces));
+  const boardId = "board";
+  document.body.appendChild(generateBoard(boardId, cellColors, chessPieces));
 
+  addOnclickEventForCells(boardId);
   // animateMoves();
 };
 
